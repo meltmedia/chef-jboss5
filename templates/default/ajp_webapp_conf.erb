@@ -1,0 +1,23 @@
+<VirtualHost *:80>
+<% if !@params['server_name'].nil? %>
+  ServerName <%= @params['server_name'] %>
+<% end %>
+  
+  ProxyPreserveHost On
+  ProxyPass /jmx-console !
+  ProxyPass /web-console !
+  ProxyPass /balancer-manager !
+  ProxyPass /server-status !
+  ProxyPass / balancer://qa-cluster/ stickysession=JSESSIONID|jsessionid nofailover=On
+  
+  <Proxy balancer://qa-cluster>
+    Order deny,allow
+    Allow from all
+    
+    BalancerMember ajp://127.0.0.1:<%= node[:jboss][:ajp_port] %>
+  </Proxy>
+
+  LogLevel warn
+  ErrorLog <%= node[:apache][:log_dir] %>/error.log
+  CustomLog <%= node[:apache][:log_dir] %>/access.log combined
+</VirtualHost>

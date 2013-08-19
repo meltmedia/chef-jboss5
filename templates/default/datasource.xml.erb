@@ -1,0 +1,13 @@
+<datasources>
+  <local-tx-datasource>
+    <jndi-name><%= @jndi_name %></jndi-name>
+    <connection-url><%= @params[:connection_url] %></connection-url>
+    <driver-class><%= @params[:driver_class] %></driver-class>
+    <user-name><%= @params[:username] %></user-name>
+    <password><%= @params[:password] %></password>
+    <min-pool-size><%= @params[:min_pool_size] %></min-pool-size>
+    <max-pool-size><%= @params[:max_pool_size] %></max-pool-size>
+    <idle-timeout-minutes><%= @params[:idle_timeout_minutes] %></idle-timeout-minutes>
+    <check-valid-connection-sql><%= @params[:connection_check] %></check-valid-connection-sql>
+  </local-tx-datasource>
+</datasources>
