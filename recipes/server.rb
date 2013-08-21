@@ -89,14 +89,13 @@ when "ubuntu","debian"
   end
 end
 
-  template "#{node[:jboss][:server]}/conf/bootstrap/profile-repository.xml" do
-    source "profile-repository.xml.erb"
-    owner node[:jboss][:systemuser]
-    group node[:jboss][:systemgroup]
-    mode "0644"
-    variables :deploy_paths => node[:jboss][:deploy_paths]
-  end
-
+template "#{node[:jboss][:server]}/conf/bootstrap/profile-repository.xml" do
+  source "profile-repository.xml.erb"
+  owner node[:jboss][:systemuser]
+  group node[:jboss][:systemgroup]
+  mode "0644"
+  variables :deploy_paths => node[:jboss][:deploy_paths]
+end
 
 chown "#{node['jboss']['dir']}" do
   user node[:jboss][:systemuser]
