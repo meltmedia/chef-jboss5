@@ -89,7 +89,7 @@ when "ubuntu","debian"
   end
 end
 
-template "#{node[:jboss][:server]}/conf/bootstrap/profile-repository.xml" do
+template "#{node[:jboss][:dir]}/#{node[:jboss][:server]}/conf/bootstrap/profile-repository.xml" do
   source "profile-repository.xml.erb"
   owner node[:jboss][:systemuser]
   group node[:jboss][:systemgroup]
