@@ -28,7 +28,6 @@ default[:jboss][:server_configuration] = "default"
 default[:jboss][:server] = "/server/#{node[:jboss][:server_configuration]}"
 default[:jboss][:lib] = "#{node[:jboss][:server]}/lib"
 default[:jboss][:deploy] = "#{node[:jboss][:server]}/deploy"
-default[:jboss][:deploy_paths] = ["/vagrant/target"]
 default[:jboss][:runlevel] = "80"
 default[:jboss][:init_script] = "/etc/init.d/jboss"
 
