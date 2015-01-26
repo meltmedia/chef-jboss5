@@ -83,10 +83,24 @@ when "ubuntu","debian"
     command "ln -s #{node[:jboss][:dir]}/bin/jboss_init_ubuntu.sh #{node[:jboss][:init_script]}"
     creates "#{node[:jboss][:init_script]}"
   end
-  
+
   execute "add-jboss-init" do
     command "update-rc.d jboss defaults #{node[:jboss][:runlevel]}"
   end
+when "redhat", "centos", "fedora"
+
+  template "#{node[:jboss][:dir]}/bin/jboss_init_redhat.sh" do
+    source "jboss_init_redhat.sh.erb"
+    owner node[:jboss][:systemuser]
+    group node[:jboss][:systemgroup]
+    mode "0755"
+  end
+
+  execute "link-jboss-init" do
+    command "ln -s #{node[:jboss][:dir]}/bin/jboss_init_redhat.sh #{node[:jboss][:init_script]}"
+    creates "#{node[:jboss][:init_script]}"
+  end
+
 end
 
 chown "#{node['jboss']['dir']}" do
